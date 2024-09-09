@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Capstone Project API</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/main.css" />
+	</head>
+	<body>
+		<div>
+			<h1>Welcome to Iulian's bookstore</h1>
+		</div>
+
+		<%if (locals.content) {%>
+
+		<div>
+			<h2>Choose a book from the list below:</h2>
+		</div>
+		<ul>
+			<% content.forEach(book => { %>
+			<form action="/books/<%= book.id %>" method="get">
+				<div class="book-card" onclick="this.closest('form').submit();">
+					<li><strong>Title:</strong> <%= book.title %></li>
+					<li><strong>Copyright:</strong> <%= book.copyright %></li>
+					<li><strong>Media Type:</strong> <%= book.media_type %></li>
+					<li><strong>Book ID:</strong> <%= book.id %></li>
+				</div>
+				<hr />
+			</form>
+
+			<% }) %>
+		</ul>
+		<%} else {%>
+		<form action="/books" method="get">
+			<button class="search-btn" id="searchButton">
+				<i></i> See our books
+			</button>
+		</form>
+		<h2>Check out our collection 👆</h2>
+		<%}%>
+	</body>
+</html>
