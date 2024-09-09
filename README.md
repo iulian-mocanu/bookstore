@@ -92,6 +92,3 @@ If you'd like to contribute, feel free to fork the repository and submit a pull 
 
 ---
 
-Feel free to customize this `README` file according to your project’s specific needs, especially for things like routes or additional features you might add later.
-
-Let me know if you need help with any other details!
