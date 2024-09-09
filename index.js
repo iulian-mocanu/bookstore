@@ -7,6 +7,7 @@ const port = 3001;
 //middleware to use the static assets from 'public' folder
 app.use(express.static("public"));
 
+//home page
 app.get("/", (req, res) => {
 	try {
 		res.render("index.ejs");
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 	}
 });
 
+//list of books
 app.get("/books", async (req, res) => {
 	try {
 		// get all books
@@ -39,16 +41,23 @@ app.get("/books", async (req, res) => {
 	}
 });
 
+//individual book page
 app.get("/books/:id", async (req, res) => {
 	const bookId = req.params.id;
 	try {
-		const response = await axios.get(`https://gutendex.com/books/${bookId}`);
-		res.render("index.ejs", { book: response.data });
+		const response = await axios.get(
+			`https://www.gutenberg.org/ebooks/${bookId}.txt.utf-8`
+		);
+		const findTitle = response.data
+			.split("\n")
+			.find((line) => line.startsWith("Title:"));
+		const bookTitle = findTitle
+			? findTitle.replace("Title:", "").trim()
+			: "Title not found";
+		res.render("book.ejs", { book: response.data, bookTitle: bookTitle });
 	} catch (error) {
-		console.log(req.params.id);
 		res.status(500);
 	}
-	console.log(req.params);
 });
 
 app.listen(port, () => {

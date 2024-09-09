@@ -1,8 +1,3 @@
-/* :root {
-    --card-height: 50vh;
-    --card-width: calc(var(--card-height) / 1.5);
-} */
-
 body {
     min-height: 100vh;
     background: #F5F5F5;
@@ -13,12 +8,70 @@ body {
     padding-bottom: 2rem;
     box-sizing: border-box;
 }
+/* title and back button  */
+.book-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Align items to the left */
+    margin-bottom: 20px;
+    /* Adds space between header and content */
+    width: 33vw;
+    /* Matches width of book-content */
+}
+
+.back-button {
+    margin-right: 20px;
+    /* Adjust the spacing between button and title */
+    padding: 8px 16px;
+    background-color:  #005f73;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #007bff;
+}
 
 h1 {
     color: #424242;
     font-family: "Montserrat";
+}
+
+/* extra margin on index.ejs view */
+.index-h1 {
     margin: 100px;
 }
+
+/* different styling on book.ejs view */
+.book-h1 {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    /* Move the h1 to the center horizontally */
+    transform: translateX(-50%);
+    /* Correct the alignment by moving it back by 50% of its own width */
+    font-size: 2em;
+    white-space: nowrap;
+    /* Prevent title from wrapping */
+}
+
+/* book view */
+ .book-content {
+     width: 33vw;
+     height: 80vh;
+     overflow-y: scroll;
+     border: 1px solid #ccc;
+     padding: 10px;
+     margin-top: 5vh;
+     background-color: #f9f9f9;
+     text-align: center;
+     /* Centers text horizontally */
+     white-space: pre-wrap;
+     /* Ensures text retains line breaks and whitespace */
+ }
 
 h2 {
     color: #424242;
@@ -86,86 +139,3 @@ hr {
     outline: none;
 }
 
-/* .book-card:hover {
-    color: rgb(88 199 250 / 100%);
-    transition: color 1s;
-} */
-
-/* .card:hover:before,
-.card:hover:after {
-    animation: none;
-    opacity: 0;
-}
-
-.card::before {
-    content: "";
-    width: 104%;
-    height: 102%;
-    border-radius: 8px;
-    background-image: linear-gradient(var(--rotate),
-            #5ddcff,
-            #3c67e3 43%,
-            #4e00c2);
-    position: absolute;
-    z-index: -1;
-    top: -1%;
-    left: -2%;
-    animation: spin 2.5s linear infinite;
-}
-
-.card::after {
-    position: absolute;
-    content: "";
-    top: calc(var(--card-height) / 6);
-    left: 0;
-    right: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
-    transform: scale(0.8);
-    filter: blur(calc(var(--card-height) / 6));
-    background-image: linear-gradient(var(--rotate),
-            #5ddcff,
-            #3c67e3 43%,
-            #4e00c2);
-    opacity: 1;
-    transition: opacity 0.5s;
-    animation: spin 2.5s linear infinite;
-} */
-
-.response-area {
-    margin-top: 20px;
-    background-color: white;
-    padding: 20px;
-}
-
-@property --rotate {
-    syntax: "<angle>";
-    initial-value: 132deg;
-    inherits: false;
-}
-
-@keyframes spin {
-    0% {
-        --rotate: 0deg;
-    }
-
-    100% {
-        --rotate: 360deg;
-    }
-}
-
-a {
-    color: #212534;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-weight: bold;
-    margin-top: 2rem;
-}
-
-.user {
-    color: white;
-    font-size: 24px;
-    font-family: "Titan One", cursive;
-}
