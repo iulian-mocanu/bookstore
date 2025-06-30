@@ -41,7 +41,6 @@ export default function () {
 	res = http.get(`${BASE_URL}/books`);
 	check(res, {
 		"books list status is 200": (r) => r.status === 200,
-		//"books list content type is text": (r) => r.headers   ("text"),
 	}) || errorRate.add(1);
 
 	// 4. Fetch book IDs and use them in next request (simulate user interaction)
@@ -71,11 +70,11 @@ export default function () {
 			r.body.includes("Route not found") || r.body.includes("404"),
 	}) || errorRate.add(1);
 
-	// 7. Static assets test (only works if you have files in /public)
+	// 7. Static assets test
 	res = http.get(`${BASE_URL}/styles.css`);
 	check(res, {
 		"static file may be served or 404": (r) => [200, 404].includes(r.status),
 	}) || errorRate.add(1);
 
-	sleep(1); // simulate think time
+	sleep(1);
 }

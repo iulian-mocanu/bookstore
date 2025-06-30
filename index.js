@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(500);
+		res.end();
 	}
 });
 
@@ -56,8 +57,22 @@ app.get("/books/:id", async (req, res) => {
 			: "Title not found";
 		res.render("book.ejs", { book: response.data, bookTitle: bookTitle });
 	} catch (error) {
-		res.status(500);
+		res.status(500).json({ error: "Failed to fetch book data" });
 	}
+});
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+	res.json({
+		status: "OK",
+		timestamp: new Date().toISOString(),
+		uptime: process.uptime(),
+	});
+});
+
+// 404 handler
+app.use("*", (req, res) => {
+	res.status(404).json({ error: "Route not found" });
 });
 
 app.listen(port, () => {
